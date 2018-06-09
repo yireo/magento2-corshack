@@ -1,0 +1,30 @@
+{
+    "name": "yireo/magento2-corshack",
+    "license": "OSL-3.0",
+    "type": "magento2-module",
+    "version": "0.0.3",
+    "homepage": "https://github.com/yireo/magento2-corshack",
+    "description": "Magento 2.3 module to add some hacks to GraphQL API",
+    "keywords":[ "composer-installer", "magento"],
+    "authors": [
+        {
+            "name": "Jisse Reitsma (Yireo)",
+            "email": "jisse@yireo.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev":{
+        "phpunit/phpunit":"*",
+        "composer/composer":"*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yireo\\CorsHack\\": ""
+        },        
+        "files": [
+            "registration.php"
+        ]
+    }
+}
