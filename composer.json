@@ -1,9 +1,9 @@
 {
-    "name": "yireo/magento2-corshack",
+    "name": "yireo-training/magento2-corshack",
     "license": "OSL-3.0",
     "type": "magento2-module",
     "version": "0.0.3",
-    "homepage": "https://github.com/yireo/magento2-corshack",
+    "homepage": "https://github.com/yireo-training/magento2-corshack",
     "description": "Magento 2.3 module to add some hacks to GraphQL API",
     "keywords":[ "composer-installer", "magento"],
     "authors": [
