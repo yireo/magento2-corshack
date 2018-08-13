@@ -8,7 +8,7 @@ adds Cross Origin headers (currently hard-coded to
 
 ### Installation
 ```
-composer require yireo-training/magento2-corshack:dev-master
+composer require yireo-training/magento2-corshack
 ```
 
 ### Todo
