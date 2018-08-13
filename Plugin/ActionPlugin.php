@@ -1,17 +1,19 @@
 <?php
+declare(strict_types=1);
+
 namespace Yireo\CorsHack\Plugin;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResponseInterface;
-use Magento\GraphQl\Controller\GraphQl as Source;
-use Magento\Framework\Webapi\Response;
+use Magento\Framework\App\Action\Action as Source;
+use Magento\Framework\App\Response\Http as Response;
 
 /**
- * Class GraphQLController
+ * Class ActionPlugin
  * @package Yireo\CorsHack\Plugin
  */
-class GraphQLController
+class ActionPlugin
 {
     /**
      * @var ResponseInterface
@@ -19,7 +21,7 @@ class GraphQLController
     private $response;
 
     /**
-     * GraphQLController constructor.
+     * ActionPlugin constructor.
      * @param Response $response
      */
     public function __construct(
