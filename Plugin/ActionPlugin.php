@@ -92,6 +92,12 @@ class ActionPlugin
             }
         }
 
+        $allowOrigin = array_unique($allowOrigin);
+
+        // If the wildcard is here, we can remove all other URLs
+        if (in_array('*', $allowOrigin)) {
+            $allowOrigin = ['*'];
+        }
 
         return implode(', ', $allowOrigin);
     }
