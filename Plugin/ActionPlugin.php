@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Yireo\CorsHack\Plugin;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResponseInterface;
@@ -11,6 +12,7 @@ use Magento\Framework\App\Response\Http as Response;
 
 /**
  * Class ActionPlugin
+ *
  * @package Yireo\CorsHack\Plugin
  */
 class ActionPlugin
@@ -19,21 +21,30 @@ class ActionPlugin
      * @var ResponseInterface
      */
     private $response;
+    /**
+     * @var ScopeConfigInterface
+     */
+    private $scopeConfig;
 
     /**
      * ActionPlugin constructor.
+     *
      * @param Response $response
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        Response $response
+        Response $response,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->response = $response;
+        $this->scopeConfig = $scopeConfig;
     }
 
     /**
      * @param Source $source
      * @param $closure
      * @param RequestInterface $request
+     *
      * @return Response
      */
     public function aroundDispatch(Source $source, $closure, RequestInterface $request)
@@ -53,16 +64,28 @@ class ActionPlugin
     }
 
     /**
-     * @todo Make a configuration option for this
      * @return string
      */
     private function getAccessControlAllowOrigin()
     {
-        return 'http://localhost:3000';
+        $allowOrigin = [];
+        $allowOrigin[] = 'http://localhost';
+        $allowOrigin[] = 'http://localhost:3000';
+
+        $storedOrigins = (string) $this->scopeConfig->getValue('corshack/settings/origin');
+        $storedOrigins = explode(',', $storedOrigins);
+        foreach ($storedOrigins as $storedOrigin) {
+            $storedOrigin = trim($storedOrigin);
+            if (!empty($storedOrigin)) {
+                $allowOrigin[] = $storedOrigin;
+            }
+        }
+
+
+        return implode(', ', $allowOrigin);
     }
 
     /**
-     * @todo Make a configuration option for this
      * @return string
      */
     private function getAccessControlAllowHeaders()

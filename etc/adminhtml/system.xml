@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CorsHack module for Magento 2
+ *
+ * @package     Yireo_CorsHack
+ * @author      Yireo
+ * @copyright   Copyright 2018 Yireo (https://www.yireo.com/)
+ * @license     Open Source License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="corshack" translate="label" sortOrder="342" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Yireo CorsHack</label>
+            <tab>advanced</tab>
+            <resource>Yireo_CorsHack::config</resource>
+            <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+
+                <field id="origin" type="textarea" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Origin Domain</label>
+                    <comment>Add URLs like http://localhost:3000 separated by commas</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
