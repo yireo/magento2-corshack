@@ -1,4 +1,14 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * CorsHack module for Magento 2
+ *
+ * @package     Yireo_CorsHack
+ * @author      Yireo
+ * @copyright   Copyright 2018 Yireo (https://www.yireo.com/)
+ * @license     Open Source License
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\App\Action\Action">
         <plugin name="Yireo_CorsHack_GraphQl" type="Yireo\CorsHack\Plugin\ActionPlugin" />
