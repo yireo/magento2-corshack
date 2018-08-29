@@ -9,4 +9,8 @@ adds Cross Origin headers (currently hard-coded to
 ### Installation
 ```
 composer require yireo-training/magento2-corshack
+./bin/magento module:enable Yireo_CorsHack
 ```
+
+### Configuration
+Navigate to **Advanced > Yireo CorsHack** and set the origin URLs that you want to work with.
