@@ -15,6 +15,7 @@ namespace Yireo\CorsHack\Plugin;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Action\Action as Source;
 use Magento\Framework\App\Response\Http as Response;
@@ -55,7 +56,7 @@ class ActionPlugin
      * @param $closure
      * @param RequestInterface $request
      *
-     * @return Response
+     * @return HttpResponse
      */
     public function aroundDispatch(Source $source, $closure, RequestInterface $request)
     {
@@ -65,7 +66,7 @@ class ActionPlugin
             return $this->response;
         }
 
-        /** @var Response $response */
+        /** @var HttpResponse $response */
         $response = $closure($request);
         $response->setHeader('Access-Control-Allow-Origin', $this->getAccessControlAllowOrigin(), true);
         $response->setHeader('Access-Control-Allow-Headers', $this->getAccessControlAllowHeaders(), true);
@@ -76,7 +77,7 @@ class ActionPlugin
     /**
      * @return string
      */
-    private function getAccessControlAllowOrigin()
+    private function getAccessControlAllowOrigin(): string
     {
         $allowOrigin = [];
         $allowOrigin[] = 'http://localhost';
@@ -98,7 +99,7 @@ class ActionPlugin
     /**
      * @return string
      */
-    private function getAccessControlAllowHeaders()
+    private function getAccessControlAllowHeaders(): string
     {
         return 'Content-Type';
     }

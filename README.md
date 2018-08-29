@@ -10,9 +10,3 @@ adds Cross Origin headers (currently hard-coded to
 ```
 composer require yireo-training/magento2-corshack
 ```
-
-### Todo
-- Add configuration option for Access-Control-Allow-Origin
-- Add configuration option for Access-Control-Allow-Headers
-- Add composer dependencies once 2.3 packages are there
-- Remove this module because it is perhaps already fixed in Magento
