@@ -10,9 +10,6 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Framework\App\Action\Action">
-        <plugin name="Yireo_CorsHack_GraphQl" type="Yireo\CorsHack\Plugin\ActionPlugin" />
-    </type>
     <type name="Magento\GraphQl\Controller\GraphQl">
         <plugin name="Yireo_CorsHack_GraphQl" type="Yireo\CorsHack\Plugin\ControllerPlugin" />
     </type>

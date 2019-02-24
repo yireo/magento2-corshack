@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Yireo\CorsHack\Utils;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\Response\Http;
+use Magento\Framework\App\Response\HttpInterface as HttpResponse;
 
 /**
  * Class ResponseGenerator
@@ -28,49 +28,60 @@ class ResponseGenerator
     }
 
     /**
-     * @param Http $response
-     * @return Http
+     * @param HttpResponse $response
+     * @return HttpResponse
      */
-    public function modifyResponse(Http $response)
+    public function modifyResponse(HttpResponse $response): HttpResponse
     {
-        $response->setHeader('Access-Control-Allow-Origin', $this->getAccessControlAllowOrigin(), true);
-        $response->setHeader('Access-Control-Allow-Headers', $this->getAccessControlAllowHeaders(), true);
+        $domains = $this->getAccessControlAllowOriginDomains();
+        foreach ($domains as $domain) {
+            $response->setHeader('Access-Control-Allow-Origin', $domain);
+        }
+
+        $headers = $this->getAccessControlAllowHeaders();
+        $response->setHeader('Access-Control-Allow-Headers', implode(',', $headers), true);
+        $response->setHeader('Access-Control-Allow-Credentials', 'true');
+
         return $response;
     }
 
     /**
      * @return string
      */
-    private function getAccessControlAllowOrigin(): string
+    private function getAccessControlAllowOriginDomains(): array
     {
-        $allowOrigin = [];
-        $allowOrigin[] = 'http://localhost';
-        $allowOrigin[] = 'http://localhost:3000';
+        $domains = [];
+        $domains[] = 'http://localhost';
+        $domains[] = 'http://localhost:3000';
 
         $storedOrigins = (string) $this->scopeConfig->getValue('corshack/settings/origin');
         $storedOrigins = explode(',', $storedOrigins);
         foreach ($storedOrigins as $storedOrigin) {
             $storedOrigin = trim($storedOrigin);
             if (!empty($storedOrigin)) {
-                $allowOrigin[] = $storedOrigin;
+                $domains[] = $storedOrigin;
             }
         }
 
-        $allowOrigin = array_unique($allowOrigin);
+        $domains = array_unique($domains);
 
         // If the wildcard is here, we can remove all other URLs
-        if (in_array('*', $allowOrigin)) {
-            $allowOrigin = ['*'];
+        if (in_array('*', $domains)) {
+            $domains = ['*'];
         }
 
-        return implode(', ', $allowOrigin);
+        return $domains;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    private function getAccessControlAllowHeaders(): string
+    private function getAccessControlAllowHeaders(): array
     {
-        return 'Content-Type';
+        $headers = [];
+        $headers[] = 'Content-Type';
+        $headers[] = 'Authorization';
+
+        return $headers;
     }
 }
