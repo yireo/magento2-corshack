@@ -16,16 +16,16 @@ use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\App\Action\Action as Source;
+use Magento\GraphQl\Controller\GraphQl as Source;
 use Magento\Framework\App\Response\Http as Response;
 use Yireo\CorsHack\Utils\ResponseGenerator;
 
 /**
- * Class ActionPlugin
+ * Class ControllerPlugin
  *
  * @package Yireo\CorsHack\Plugin
  */
-class ActionPlugin
+class ControllerPlugin
 {
     /**
      * @var ResponseInterface

@@ -13,4 +13,7 @@
     <type name="Magento\Framework\App\Action\Action">
         <plugin name="Yireo_CorsHack_GraphQl" type="Yireo\CorsHack\Plugin\ActionPlugin" />
     </type>
+    <type name="Magento\GraphQl\Controller\GraphQl">
+        <plugin name="Yireo_CorsHack_GraphQl" type="Yireo\CorsHack\Plugin\ControllerPlugin" />
+    </type>
 </config>
