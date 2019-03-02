@@ -34,9 +34,7 @@ class ResponseGenerator
     public function modifyResponse(HttpResponse $response): HttpResponse
     {
         $domains = $this->getAccessControlAllowOriginDomains();
-        foreach ($domains as $domain) {
-            $response->setHeader('Access-Control-Allow-Origin', $domain);
-        }
+        $response->setHeader('Access-Control-Allow-Origin', implode(', ', $domains));
 
         $headers = $this->getAccessControlAllowHeaders();
         $response->setHeader('Access-Control-Allow-Headers', implode(',', $headers), true);
@@ -51,8 +49,6 @@ class ResponseGenerator
     private function getAccessControlAllowOriginDomains(): array
     {
         $domains = [];
-        $domains[] = 'http://localhost';
-        $domains[] = 'http://localhost:3000';
 
         $storedOrigins = (string) $this->scopeConfig->getValue('corshack/settings/origin');
         $storedOrigins = explode(',', $storedOrigins);
@@ -65,8 +61,7 @@ class ResponseGenerator
 
         $domains = array_unique($domains);
 
-        // If the wildcard is here, we can remove all other URLs
-        if (in_array('*', $domains)) {
+        if (count($domains) > 1) {
             $domains = ['*'];
         }
 

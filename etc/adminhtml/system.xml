@@ -20,7 +20,7 @@
 
                 <field id="origin" type="textarea" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Origin Domain</label>
-                    <comment>Add URLs like http://localhost:3000 separated by commas</comment>
+                    <comment>Add a URL like http://localhost:3000, or a wildcard *. Note that a comma-separated list does not work in the browser. If you have multiple domains, use a wildcard instead.</comment>
                 </field>
             </group>
         </section>
