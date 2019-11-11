@@ -8,7 +8,7 @@ use Magento\Framework\App\Response\HttpInterface as HttpResponse;
 
 /**
  * Class ResponseGenerator
- * @package Jola\CorsHack\Utils
+ * @package Yireo\CorsHack\Utils
  */
 class ResponseGenerator
 {

@@ -3,8 +3,8 @@
  * CorsHack module for Magento 2
  *
  * @package     Yireo_CorsHack
- * @author      Jola
- * @copyright   Copyright 2018 Jola (https://www.yireo.com/)
+ * @author      Yireo
+ * @copyright   Copyright 2018 Yireo (https://www.yireo.com/)
  * @license     Open Source License
  */
 
@@ -17,7 +17,7 @@ use Magento\TestFramework\TestCase\AbstractController as ControllerTestCase;
 
 /**
  * Class CheckResponseTest
- * @package Jola\CorsHack\Test\Integration
+ * @package Yireo\CorsHack\Test\Integration
  */
 class CheckResponseTest extends ControllerTestCase
 {

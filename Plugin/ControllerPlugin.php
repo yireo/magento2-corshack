@@ -3,8 +3,8 @@
  * CorsHack module for Magento 2
  *
  * @package     Yireo_CorsHack
- * @author      Jola
- * @copyright   Copyright 2018 Jola (https://www.yireo.com/)
+ * @author      Yireo
+ * @copyright   Copyright 2018 Yireo (https://www.yireo.com/)
  * @license     Open Source License
  */
 
@@ -23,7 +23,7 @@ use Yireo\CorsHack\Utils\ResponseGenerator;
 /**
  * Class ControllerPlugin
  *
- * @package Jola\CorsHack\Plugin
+ * @package Yireo\CorsHack\Plugin
  */
 class ControllerPlugin
 {
