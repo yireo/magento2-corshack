@@ -28,11 +28,6 @@ use Yireo\CorsHack\Utils\ResponseGenerator;
 class ControllerPlugin
 {
     /**
-     * @var ResponseInterface
-     */
-    private $response;
-
-    /**
      * @var ResponseGenerator
      */
     private $responseGenerator;
@@ -40,14 +35,11 @@ class ControllerPlugin
     /**
      * ActionPlugin constructor.
      *
-     * @param Response $response
      * @param ResponseGenerator $responseGenerator
      */
     public function __construct(
-        Response $response,
         ResponseGenerator $responseGenerator
     ) {
-        $this->response = $response;
         $this->responseGenerator = $responseGenerator;
     }
 
@@ -58,19 +50,9 @@ class ControllerPlugin
      *
      * @return HttpResponse
      */
-    public function aroundDispatch(Source $source, $closure, RequestInterface $request)
+    public function afterDispatch(Source $source, HttpResponse $response)
     {
-        /** @var $request Http */
-        if ($request->isOptions()) {
-            $this->response = $this->responseGenerator->modifyResponse($this->response);
-            $this->response->setHttpResponseCode(200);
-            return $this->response;
-        }
-
-        /** @var HttpResponse $response */
-        $response = $closure($request);
         $response = $this->responseGenerator->modifyResponse($response);
-
         return $response;
     }
 }
