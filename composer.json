@@ -2,7 +2,7 @@
     "name": "yireo-training/magento2-corshack",
     "license": "OSL-3.0",
     "type": "magento2-module",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "homepage": "https://github.com/yireo-training/magento2-corshack",
     "description": "Magento 2.3 module to add some hacks to GraphQL API",
     "keywords":[ "composer-installer", "magento"],
@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "ext-json": "*"
     },
     "require-dev":{
         "phpunit/phpunit":"*",
