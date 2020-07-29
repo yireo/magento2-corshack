@@ -12,7 +12,9 @@ declare(strict_types=1);
 
 namespace Yireo\CorsHack\Test\Integration;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http;
+use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\AbstractController as ControllerTestCase;
 
 /**
@@ -23,10 +25,16 @@ class CheckResponseTest extends ControllerTestCase
 {
     /**
      * Test whether any response contains proper headers
+     *
+     * @magentoConfigFixture default/corshack/settings/origin *
      */
     public function testIfResponseContainsCrossOriginHeaders()
     {
-        $this->dispatch('/');
+        /** @var ScopeConfigInterface $scopeConfig */
+        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $this->assertSame('*', $scopeConfig->getValue('corshack/settings/origin'));
+
+        $this->dispatch('/graphql');
 
         /** @var Http $response */
         $response = $this->getResponse();
@@ -35,7 +43,9 @@ class CheckResponseTest extends ControllerTestCase
         $foundAccessControlAllowOrigin = false;
         $foundAccessControlAllowHeaders = false;
 
+        /** @var \Laminas\Http\Headers $headers */
         $headers = $response->getHeaders();
+
         foreach ($headers as $header) {
             if ($header->getFieldName() === 'Access-Control-Allow-Origin') {
                 $foundAccessControlAllowOrigin = true;

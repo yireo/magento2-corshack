@@ -16,7 +16,7 @@ use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface;
 use Magento\GraphQl\Controller\GraphQl as Source;
 use Yireo\CorsHack\Utils\ResponseGenerator;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 /**
  * Class ControllerPlugin
