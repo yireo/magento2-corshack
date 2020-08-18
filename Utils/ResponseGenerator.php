@@ -33,6 +33,8 @@ class ResponseGenerator
      */
     public function modifyResponse(HttpResponse $response): HttpResponse
     {
+        $response->setHeader('X-Yireo-CorsHack', 1);
+
         $domains = $this->getAccessControlAllowOriginDomains();
         $response->setHeader('Access-Control-Allow-Origin', implode(', ', $domains));
 

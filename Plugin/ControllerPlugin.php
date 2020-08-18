@@ -14,9 +14,10 @@ namespace Yireo\CorsHack\Plugin;
 
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface;
+use Magento\Framework\App\ResponseInterface;
 use Magento\GraphQl\Controller\GraphQl as Source;
+use Yireo\CorsHack\Utils\RequestResponseValidator;
 use Yireo\CorsHack\Utils\ResponseGenerator;
-use Laminas\Http\Request;
 
 /**
  * Class ControllerPlugin
@@ -31,22 +32,22 @@ class ControllerPlugin
     private $responseGenerator;
 
     /**
-     * @var Request
+     * @var RequestResponseValidator
      */
-    private $request;
+    private $requestResponseValidator;
 
     /**
      * ActionPlugin constructor.
      *
      * @param ResponseGenerator $responseGenerator
-     * @param Request $request
+     * @param RequestResponseValidator $requestResponseValidator
      */
     public function __construct(
         ResponseGenerator $responseGenerator,
-        Request $request
+        RequestResponseValidator $requestResponseValidator
     ) {
         $this->responseGenerator = $responseGenerator;
-        $this->request = $request;
+        $this->requestResponseValidator = $requestResponseValidator;
     }
 
     /**
@@ -54,34 +55,12 @@ class ControllerPlugin
      * @param HttpResponse $response
      * @return HttpInterface
      */
-    public function afterDispatch(Source $source, HttpResponse $response)
+    public function afterDispatch(Source $source, ResponseInterface $response)
     {
-        if ($this->spoofStatusHeaderIgnorantly($response)) {
+        if ($this->requestResponseValidator->validate($response)) {
             $response->setStatusHeader(200);
         }
 
         return $this->responseGenerator->modifyResponse($response);
-    }
-
-    /**
-     * @param HttpResponse $response
-     * @return bool
-     */
-    private function spoofStatusHeaderIgnorantly(HttpResponse $response): bool
-    {
-        if ($this->request->getMethod() === 'OPTIONS') {
-            return true;
-        }
-
-        if ($this->request->getMethod() === 'GET') {
-            return true;
-        }
-
-        $data = json_decode($response->getBody(), true);
-        if (!empty($data) && !empty($data['data']) && empty($data['errors'])) {
-            return true;
-        }
-
-        return false;
     }
 }
