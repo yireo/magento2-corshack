@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * CorsHack module for Magento 2
  *
@@ -7,8 +7,6 @@
  * @copyright   Copyright 2018 Yireo (https://www.yireo.com/)
  * @license     Open Source License
  */
-
-declare(strict_types=1);
 
 namespace Yireo\CorsHack\Plugin;
 
