@@ -13,10 +13,14 @@ composer require yireo-training/magento2-corshack
 ```
 
 ### Configuration
-Navigate to **Advanced > Yireo CorsHack** and add your URLs to the **Origin Domain** option.
+Navigate to **Advanced > Yireo CorsHack** and add the schema + domain URL to the **Origin Domain** option.
 
-By default, the following URLs work right away:
-- `http://localhost/`
-- `http://localhost:3000/`
+By default, a wildcard (`*`) is configured allowing all origin domains.
 
-If you want all domains to match, add a wildcard (`*`) to the **Origin Domain** option.
+Examples of values that can be configured:
+- *
+- https://yireo.com
+- http://localhost
+- http://localhost:3000
+
+In general the configuration value includes schema and domain name. It also includes the port number if it is not standard.
