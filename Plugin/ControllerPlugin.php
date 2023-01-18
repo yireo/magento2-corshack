@@ -55,6 +55,7 @@ class ControllerPlugin
      */
     public function afterDispatch(Source $source, ResponseInterface $response)
     {
+        return $response;
         if ($this->requestResponseValidator->validate($response)) {
             $response->setStatusHeader(200);
         }
