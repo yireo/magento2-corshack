@@ -17,6 +17,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResponseInterface;
 use Magento\GraphQl\Controller\GraphQl;
 use Magento\TestFramework\TestCase\AbstractController as ControllerTestCase;
+use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
 
 /**
  * Class CheckResponseTest
@@ -24,6 +25,8 @@ use Magento\TestFramework\TestCase\AbstractController as ControllerTestCase;
  */
 class CheckResponseTest extends ControllerTestCase
 {
+    use AssertModuleIsEnabled;
+
     /**
      * Test whether any response contains proper headers
      *
@@ -33,6 +36,7 @@ class CheckResponseTest extends ControllerTestCase
      */
     public function testIfResponseContainsCrossOriginHeaders()
     {
+        $this->assertModuleIsEnabled('Magento_GraphQl');
         $this->assertCorsHackOrigin('*');
         $response = $this->sendGraphQlRequest();
 
@@ -55,6 +59,7 @@ class CheckResponseTest extends ControllerTestCase
      */
     public function testIfResponseContainsCrossOriginHeadersWithFpcEnabled()
     {
+        $this->assertModuleIsEnabled('Magento_GraphQl');
         $this->assertCorsHackOrigin('*');
         $response = $this->sendGraphQlRequest();
 
@@ -120,7 +125,7 @@ class CheckResponseTest extends ControllerTestCase
         }
 
         $this->assertTrue($headersAsString > 0);
-        $msg = $header . ' not found: ' . var_export($headersAsString, true);
+        $msg = $expectedHeader . ' not found: ' . var_export($headersAsString, true);
         $this->assertTrue($foundHeader, $msg);
     }
 
